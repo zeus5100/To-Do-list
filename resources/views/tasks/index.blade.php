@@ -71,6 +71,7 @@
                 <td class="border border-gray-300 px-4 py-2 capitalize">{{ str_replace('_', ' ', $task->status) }}</td>
                 <td class="border border-gray-300 px-4 py-2">{{ date('Y-m-d', strtotime($task->completion_date)) }}</td>
                 <td class="border border-gray-300 px-4 py-2 space-x-2">
+                    <a href="{{ route('tasks.show', $task) }}" class="text-green-600 hover:underline">Pokaż</a>
                     <a href="{{ route('tasks.edit', $task) }}" class="text-blue-600 hover:underline">Edytuj</a>
                     <form action="{{ route('tasks.destroy', $task) }}" method="POST" class="inline" onsubmit="return confirm('Na pewno usunąć?');">
                         @csrf
