@@ -55,6 +55,12 @@
                         @endif
                         @else
                         <li>
+                            <a href="{{ route('tasks.index') }}" class="text-gray-700 hover:text-gray-900">
+                                {{ __('Tasks') }}
+                            </a>
+                        </li>
+                        <li>
+
                             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="text-gray-700 hover:text-gray-900">
                                 {{ __('Logout') }}
                             </a>
