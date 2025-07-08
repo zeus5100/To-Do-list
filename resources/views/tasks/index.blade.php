@@ -2,6 +2,42 @@
 
 @section('content')
 <div class="container mx-auto max-w-5xl mt-10 p-6 bg-white rounded shadow">
+    <form method="GET" action="{{ route('tasks.index') }}" class="flex space-x-6 mb-6">
+        <div>
+            <label for="priority" class="block mb-1 font-semibold">Priorytet</label>
+            <select name="priority" id="priority" class="border rounded px-3 py-2">
+                <option value="">Wszystkie</option>
+                @foreach(\App\Enums\Priority::cases() as $priority)
+                <option value="{{ $priority->value }}" @selected(request('priority')==$priority->value)>{{ ucfirst($priority->value) }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div>
+            <label for="status" class="block mb-1 font-semibold">Status</label>
+            <select name="status" id="status" class="border rounded px-3 py-2">
+                <option value="">Wszystkie</option>
+                @foreach(\App\Enums\Status::cases() as $status)
+                <option value="{{ $status->value }}" @selected(request('status')==$status->value)>{{ ucfirst(str_replace('_', ' ', $status->value)) }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div>
+            <label for="date_from" class="block mb-1 font-semibold">Termin od</label>
+            <input type="date" name="date_from" id="date_from" value="{{ request('date_from') }}" class="border rounded px-3 py-2" />
+        </div>
+
+        <div>
+            <label for="date_to" class="block mb-1 font-semibold">Termin do</label>
+            <input type="date" name="date_to" id="date_to" value="{{ request('date_to') }}" class="border rounded px-3 py-2" />
+        </div>
+
+        <div class="flex items-end gap-x-2">
+            <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Filtruj</button>
+            <a href="{{ route('tasks.index') }}" class="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400">Wyczyść</a>
+        </div>
+    </form>
     @if (session('success'))
     <div class="mb-4 px-4 py-2 bg-green-100 text-green-800 rounded">
         {{ session('success') }}

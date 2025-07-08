@@ -13,10 +13,18 @@ class TaskController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tasks = Task::where('user_id', auth()->id())->paginate(10);
-        return view('tasks.index', compact('tasks'));
+        $tasks = auth()->user()
+            ->tasks()
+            ->filter($request->only(['priority', 'status', 'date_from', 'date_to']))
+            ->paginate(10)
+            ->withQueryString();
+        return view('tasks.index', [
+            'tasks' => $tasks,
+            'priorities' => Priority::cases(),
+            'statuses' => Status::cases(),
+        ]);
     }
 
     /**
