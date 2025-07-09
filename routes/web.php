@@ -15,7 +15,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
 Route::middleware('auth')->group(function () {
     Route::resource('tasks', TaskController::class);
     Route::post('/tasks/{task}/calendar', [GoogleCalendarController::class, 'addToCalendar'])->name('tasks.addToCalendar');
@@ -26,6 +25,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/google-calendar/auth', [GoogleCalendarAuthController::class, 'redirect']);
     Route::get('/oauth2callback', [GoogleCalendarAuthController::class, 'callback'])->name('google-calendar.callback');
 });
-
 
 Route::get('/shared/{token}', [TaskShareController::class, 'show'])->name('tasks.share.show');

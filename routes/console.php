@@ -17,5 +17,5 @@ Schedule::call(function () {
     Task::whereDate('completion_date', $tomorrow)
         ->with('user')
         ->get()
-        ->each(fn($task) => $task->user->notify(new TaskReminderEmail($task)));
+        ->each(fn ($task) => $task->user->notify(new TaskReminderEmail($task)));
 })->dailyAt('00:01');

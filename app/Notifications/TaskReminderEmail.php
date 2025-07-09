@@ -6,7 +6,6 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use Illuminate\Support\Facades\Log;
 
 class TaskReminderEmail extends Notification implements ShouldQueue
 {
@@ -34,7 +33,7 @@ class TaskReminderEmail extends Notification implements ShouldQueue
     {
         return (new MailMessage)
             ->greeting('Przypomnienie')
-            ->subject('Przypomnienie o zadaniu - ' . $this->task->name)
+            ->subject('Przypomnienie o zadaniu - '.$this->task->name)
             ->line("Twoje zadanie \"{$this->task->name}\" ma termin jutro: {$this->task->completion_date}.")
             ->action('Zobacz zadanie', route('tasks.show', $this->task))
             ->salutation('Pozdrawiamy, Zespół To-Do List');

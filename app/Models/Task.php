@@ -37,9 +37,9 @@ class Task extends Model
             $q->where('priority', $filters['priority']);
         })->when(isset($filters['status']) && Status::tryFrom($filters['status']), function ($q) use ($filters) {
             $q->where('status', $filters['status']);
-        })->when(!empty($filters['date_from']), function ($q) use ($filters) {
+        })->when(! empty($filters['date_from']), function ($q) use ($filters) {
             $q->whereDate('completion_date', '>=', $filters['date_from']);
-        })->when(!empty($filters['date_to']), function ($q) use ($filters) {
+        })->when(! empty($filters['date_to']), function ($q) use ($filters) {
             $q->whereDate('completion_date', '<=', $filters['date_to']);
         });
     }

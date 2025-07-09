@@ -20,6 +20,7 @@ class TaskController extends Controller
             ->filter($request->only(['priority', 'status', 'date_from', 'date_to']))
             ->paginate(10)
             ->withQueryString();
+
         return view('tasks.index', [
             'tasks' => $tasks,
             'priorities' => Priority::cases(),
@@ -66,7 +67,8 @@ class TaskController extends Controller
     public function edit(Task $task)
     {
         $this->authorize('update', $task);
-        return view('tasks.edit',  [
+
+        return view('tasks.edit', [
             'task' => $task,
             'priorities' => Priority::cases(),
             'statuses' => Status::cases(),
@@ -80,6 +82,7 @@ class TaskController extends Controller
     {
         $this->authorize('update', $task);
         $task->update($request->validated());
+
         return redirect()->route('tasks.index')->with('success', 'Zadanie zaktualizowane.');
     }
 

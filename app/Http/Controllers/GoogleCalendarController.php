@@ -11,7 +11,7 @@ class GoogleCalendarController extends Controller
 {
     public function addToCalendar(Task $task)
     {
-        if (!Storage::disk('local')->exists('google-calendar/oauth-token.json')) {
+        if (! Storage::disk('local')->exists('google-calendar/oauth-token.json')) {
             return redirect('/google-calendar/auth');
         }
         $event = new Event;

@@ -29,7 +29,7 @@ class TaskShareController extends Controller
             ->where('expires_at', '>', now())
             ->first();
 
-        if (!$link) {
+        if (! $link) {
             return view('tasks.invalid-link');
         }
 

@@ -22,7 +22,7 @@ class TaskHistoryController extends Controller
 
         return view('tasks.history', [
             'task' => $task,
-            'history' => $history
+            'history' => $history,
         ]);
     }
 }
