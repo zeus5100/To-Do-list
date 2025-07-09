@@ -5,6 +5,8 @@ namespace App\Models;
 use App\Enums\Priority;
 use App\Enums\Status;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
@@ -19,9 +21,14 @@ class Task extends Model
         'user_id',
     ];
 
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function publicLinks(): HasMany
+    {
+        return $this->hasMany(PublicTaskLink::class);
     }
 
     public function scopeFilter($query, array $filters)

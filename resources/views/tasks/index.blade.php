@@ -43,6 +43,14 @@
         {{ session('success') }}
     </div>
     @endif
+    @if (session('link'))
+    <div class="mb-4 px-4 py-2 bg-green-100 text-green-800 rounded flex flex-wrap items-center">
+        <p class="w-full">Pomyślnie udostępniono</p>
+        <a href="{{ session('link') }}" target="_blank" class=" text-blue-600 hover:underline">
+            {{ session('link') }}
+        </a>
+    </div>
+    @endif
     <div class="flex items-center justify-between mb-6">
         <h1 class="text-2xl font-semibold">Lista zadań</h1>
         <a href="{{ route('tasks.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
@@ -74,6 +82,10 @@
                     <a href="{{ route('tasks.show', $task) }}" class="text-green-600 hover:underline">Pokaż</a>
                     <a href="{{ route('tasks.edit', $task) }}" class="text-blue-600 hover:underline">Edytuj</a>
                     <a href="{{ route('tasks.history', $task) }}" class="text-yellow-600 hover:underline">Historia</a>
+                    <form action="{{ route('tasks.share', $task) }}" method="POST" class="inline">
+                        @csrf
+                        <button type="submit" class="text-purple-600 hover:underline">Udostępnij</button>
+                    </form>
                     <form action="{{ route('tasks.destroy', $task) }}" method="POST" class="inline" onsubmit="return confirm('Na pewno usunąć?');">
                         @csrf
                         @method('DELETE')
