@@ -7,7 +7,7 @@
             <label for="priority" class="block mb-1 font-semibold">Priorytet</label>
             <select name="priority" id="priority" class="border rounded px-3 py-2">
                 <option value="">Wszystkie</option>
-                @foreach(\App\Enums\Priority::cases() as $priority)
+                @foreach($priorities as $priority)
                 <option value="{{ $priority->value }}" @selected(request('priority')==$priority->value)>{{ ucfirst($priority->value) }}</option>
                 @endforeach
             </select>
@@ -17,7 +17,7 @@
             <label for="status" class="block mb-1 font-semibold">Status</label>
             <select name="status" id="status" class="border rounded px-3 py-2">
                 <option value="">Wszystkie</option>
-                @foreach(\App\Enums\Status::cases() as $status)
+                @foreach($statuses as $status)
                 <option value="{{ $status->value }}" @selected(request('status')==$status->value)>{{ ucfirst(str_replace('_', ' ', $status->value)) }}</option>
                 @endforeach
             </select>
@@ -73,6 +73,7 @@
                 <td class="border border-gray-300 px-4 py-2 space-x-2">
                     <a href="{{ route('tasks.show', $task) }}" class="text-green-600 hover:underline">Pokaż</a>
                     <a href="{{ route('tasks.edit', $task) }}" class="text-blue-600 hover:underline">Edytuj</a>
+                    <a href="{{ route('tasks.history', $task) }}" class="text-yellow-600 hover:underline">Historia</a>
                     <form action="{{ route('tasks.destroy', $task) }}" method="POST" class="inline" onsubmit="return confirm('Na pewno usunąć?');">
                         @csrf
                         @method('DELETE')

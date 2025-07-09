@@ -21,7 +21,7 @@ class TaskCreateRequest extends FormRequest
             'description' => 'nullable|string',
             'priority' => ['required', 'string', Rule::in(Priority::values())],
             'status' => ['required', 'string', Rule::in(Status::values())],
-            'completion_date' => 'required|date',
+            'completion_date' => 'required|date|date_format:Y-m-d',
         ];
     }
 }

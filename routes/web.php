@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\TaskHistoryController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -14,4 +15,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::middleware('auth')->group(function () {
     Route::resource('tasks', TaskController::class);
+    Route::get('/tasks/{task}/history', TaskHistoryController::class)->name('tasks.history');
 });

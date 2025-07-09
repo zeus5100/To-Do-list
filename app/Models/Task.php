@@ -5,6 +5,8 @@ namespace App\Models;
 use App\Enums\Priority;
 use App\Enums\Status;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 
 class Task extends Model
 {
@@ -32,6 +34,18 @@ class Task extends Model
             $q->whereDate('completion_date', '>=', $filters['date_from']);
         })->when(!empty($filters['date_to']), function ($q) use ($filters) {
             $q->whereDate('completion_date', '<=', $filters['date_to']);
+        });
+    }
+
+    protected static function booted()
+    {
+        static::updating(function (Task $task) {
+            $snapshot = Arr::except($task->getOriginal(), ['id', 'created_at', 'updated_at', 'user_id']);
+            DB::table('task_versions')->insert([
+                'task_id' => $task->id,
+                'snapshot' => json_encode($snapshot),
+                'created_at' => now(),
+            ]);
         });
     }
 }

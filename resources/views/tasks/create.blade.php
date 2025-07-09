@@ -48,10 +48,12 @@
             <input type="date" name="completion_date" id="completion_date" required class="w-full px-3 py-2 border rounded @error('completion_date') border-red-500 @else border-gray-300 @enderror focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ old('completion_date') }}">
             @error('completion_date')<p class="mt-1 text-red-600 text-sm">{{ $message }}</p>@enderror
         </div>
-
-        <button type="submit" class="w-full bg-blue-600 text-white py-2 mt-2 rounded hover:bg-blue-700 transition">
-            Utwórz
-        </button>
+        <div class="flex gap-x-2 justify-center">
+            <button type="submit" class=" bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                Utwórz
+            </button>
+            <a href="{{ route('tasks.index') }}" class="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400">Powrót</a>
+        </div>
     </form>
 </div>
 @endsection
