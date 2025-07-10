@@ -1,21 +1,22 @@
 # To-Do-list
 
-##  Requirements
-- PHP (Laravel Sail / Docker)
-- Composer
-- Node.js + npm
+## Requirements
 
-##  Installation
+-   PHP (Laravel Sail / Docker)
+-   Composer
+-   Node.js + npm
+
+## Installation
 
 1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/zeus5100/To-Do-list
-   cd To-Do-list
-   ```
+    ```bash
+    git clone https://github.com/zeus5100/To-Do-list
+    cd To-Do-list
+    ```
 2. **Copy the `.env` file and configure mail settings:**
     ```bash
-   cp .env.example .env
-   ```
+    cp .env.example .env
+    ```
 3. **Update mail settings (e.g., for Mailtrap):**
     ```env
     MAIL_MAILER=smtp
@@ -23,20 +24,30 @@
     MAIL_PORT=2525
     MAIL_USERNAME=twoj_login
     MAIL_PASSWORD=twoje_haslo
-   ```
+    ```
 4. **Install dependencies:**
     ```bash
     composer install
     npm install
-   ```
-5. **Run Docker containers:**
+    ```
+5. **Build frontend assets:**
+    ```bash
+     npm run build
+    ```
+6. **Run Docker containers:**
     ```bash
     ./vendor/bin/sail up -d
-   ```
-6. **Generate the application key:**
+    ```
+7. **Generate the application key:**
     ```bash
     ./vendor/bin/sail artisan key:generate
-   ```
+    ```
+
+## Access the application
+
+After setup, open your browser and go to:
+
+[http://localhost:8000/](http://localhost:8000/)
 
 ## Task Reminders
 
