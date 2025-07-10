@@ -11,7 +11,7 @@ class GoogleCalendarAuthController extends Controller
     public function redirect()
     {
         $client = new Google_Client;
-        $client->setAuthConfig(storage_path('app/google-calendar/oauth-credentials.json'));
+        $client->setAuthConfig(base_path('credentials/oauth-credentials.json'));
         $client->setRedirectUri(route('google-calendar.callback'));
         $client->addScope(\Google_Service_Calendar::CALENDAR);
         $authUrl = $client->createAuthUrl();
@@ -22,7 +22,7 @@ class GoogleCalendarAuthController extends Controller
     public function callback(Request $request)
     {
         $client = new Google_Client;
-        $client->setAuthConfig(storage_path('app/google-calendar/oauth-credentials.json'));
+        $client->setAuthConfig(base_path('credentials/oauth-credentials.json'));
         $client->setRedirectUri(route('google-calendar.callback'));
 
         $token = $client->fetchAccessTokenWithAuthCode($request->code);
