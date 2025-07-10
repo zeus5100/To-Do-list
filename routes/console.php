@@ -4,7 +4,6 @@ use App\Models\Task;
 use App\Notifications\TaskReminderEmail;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schedule;
 
 Artisan::command('inspire', function () {
@@ -12,7 +11,6 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote');
 
 Schedule::call(function () {
-    Log::info('Daily task reminder');
     $tomorrow = now()->addDay()->toDateString();
     Task::whereDate('completion_date', $tomorrow)
         ->with('user')
