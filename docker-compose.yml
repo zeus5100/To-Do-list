@@ -1,12 +1,12 @@
 services:
-    laravel:
+    laravel.test:
         build:
             context: './vendor/laravel/sail/runtimes/8.4'
             args:
                 WWWGROUP: '${WWWGROUP}'
         image: 'sail-8.4/app'
         ports:
-            - '${APP_PORT:-8000}:80'
+            - '8000:80'
             - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
         environment:
             WWWUSER: '${WWWUSER}'

@@ -47,7 +47,7 @@
 
 After setup, open your browser and go to:
 
-[http://localhost:8000/](http://localhost:8000/)
+<a href="http://localhost:8000" target="_blank" rel="noopener noreferrer">http://localhost:8000</a>
 
 ## Task Reminders
 
