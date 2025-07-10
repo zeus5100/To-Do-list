@@ -32,6 +32,10 @@ services:
             MYSQL_ALLOW_EMPTY_PASSWORD: 1
         volumes:
             - 'sail-mysql:/var/lib/mysql'
+        healthcheck:
+            test: ["CMD", "mysqladmin", "ping", "-p${DB_PASSWORD}"]
+            retries: 3
+            timeout: 1s
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
         environment:
@@ -44,7 +48,8 @@ services:
             context: .
         image: laravel-worker
         depends_on:
-        - mysql
+            mysql:
+                condition: service_healthy
         volumes:
         - .:/var/www/html
 volumes:
